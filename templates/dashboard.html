@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'title' %}DASHBOARD{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="/static/css/dashboard.css">
+{% endblock %}
+
+
+{% block 'content' %}
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+        FARMATRACK
+        <i class="fa fa-envira" aria-hidden="true"></i>
+        <!-- <img src="{% static 'img/logo.png' %}" alt="My image"> -->
+    </a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/field">
+                            <i class="fa fa-map" aria-hidden="true"></i>
+                            Fields
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-shower" aria-hidden="true"></i>
+                            Water 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-inr" aria-hidden="true"></i>
+                            Expenses
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-usd" aria-hidden="true"></i>
+                            Sales
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-cubes" aria-hidden="true"></i>
+                            Inventory
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-steam-square" aria-hidden="true"></i>
+                            Equipments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            Labour
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            Crop Calendar 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                            Reports 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Logout 
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        This week
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="metric bg-info">
+                            <span class="icon"><i class="fa fa-inr"></i></span>
+                            <p>
+                                <span class="number">1,252</span>
+                                <span class="title">Expenses</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric bg-primary">
+                            <span class="icon"><i class="fa fa-usd"></i></span>
+                            <p>
+                                <span class="number">203</span>
+                                <span class="title">Sales</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric bg-secondary">
+                            <span class="icon"><i class="fa fa-money"></i></span>
+                            <p>
+                                <span class="number">274,678</span>
+                                <span class="title">Loan</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric bg-warning">
+                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+                            <p>
+                                <span class="number">35%</span>
+                                <span class="title">Revenue</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block 'script' %}
+{% endblock %}

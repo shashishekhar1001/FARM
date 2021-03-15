@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'title' %}DASHBOARD{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="/static/css/dashboard.css">
+{% endblock %}
+
+
+{% block 'content' %}
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+        FARMATRACK
+        <i class="fa fa-envira" aria-hidden="true"></i>
+        <!-- <img src="{% static 'img/logo.png' %}" alt="My image"> -->
+    </a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</header>
+
+{% verbatim %}
+<div id="app">
+    <div class="container-fluid" id="field_form">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/field">
+                                <i class="fa fa-map" aria-hidden="true"></i>
+                                Fields
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-shower" aria-hidden="true"></i>
+                                Water 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-inr" aria-hidden="true"></i>
+                                Expenses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-usd" aria-hidden="true"></i>
+                                Sales
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                Inventory
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-steam-square" aria-hidden="true"></i>
+                                Equipments
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                Labour
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                Crop Calendar 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                Reports 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Logout 
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Fields</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Add &nbsp;&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add New Field</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div v-show="errors.length > 0">
+                                <div v-for="(error, index) in errors" :key="index">
+                                    <div class="alert alert-danger" role="alert">
+                                        [[ error ]]
+                                    </div>
+                                </div>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="field_name" class="form-label">Field Name</label>
+                                            <input v-model="field_name" type="text" class="form-control" id="field_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="field_sector" class="form-label">Field Sector</label>
+                                            <input v-model="field_sector" type="text" class="form-control" id="field_sector" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="field_area" class="form-label">Field Area</label>
+                                            <input v-model="field_area" type="number" class="form-control" id="field_area" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="field_map" class="form-label">Field Map</label>
+                                            <input @change="handleFieldMapUpload" type="file" class="form-control" id="field_map" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="field_7_12" class="form-label">Field 7 / 12</label>
+                                            <input @change="handleField_7_12_Upload" type="file" class="form-control" id="field_7_12" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="field_khate_utara" class="form-label">Field Khate Utaara</label>
+                                    <input @change="handleFieldKhateUtaraUpload" type="file" class="form-control" id="field_khate_utara" required>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_name" class="form-label">Field Owner Name</label>
+                                            <input v-model="field_owner_name" type="text" class="form-control" id="field_owner_name" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_pic" class="form-label">Field Owner Picture</label>
+                                            <input @change="handleFieldOwnerPicUpload" type="file" class="form-control" id="field_owner_pic" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_aadhar_no" class="form-label">Aadhaar No.</label>
+                                            <input v-model="field_owner_aadhar_no" type="text" class="form-control" id="field_owner_aadhar_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_aadhar_scan" class="form-label">Aadhaar Scan</label>
+                                            <input @change="handleFieldOwnerAadharScanUpload" type="file" class="form-control" id="field_owner_aadhar_scan" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_pan_no" class="form-label">PAN No.</label>
+                                            <input  v-model="field_owner_pan_no" type="text" class="form-control" id="field_owner_pan_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_pan_scan" class="form-label">PAN Scan</label>
+                                            <input @change="handleFieldOwnerPanScanUpload" type="file" class="form-control" id="field_owner_pan_scan" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_bank_acc_no" class="form-label">Bank Acc No.</label>
+                                            <input v-model="field_owner_bank_acc_no" type="text" class="form-control" id="field_owner_bank_acc_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_bank_scan" class="form-label">Passbook Scan</label>
+                                            <input @change="handleFieldOwnerBankScanUpload" type="file" class="form-control" id="field_owner_bank_scan" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button v-on:click.prevent="submitForm" type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div id="counter">
+                        Counter: [[err_msg]] 
+                    </div>  
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+{% endverbatim %}  
+
+
+
+{% endblock %}
+
+
+{% block 'script' %}
+<script src="/static/js/field.js"></script>
+{% endblock %}
