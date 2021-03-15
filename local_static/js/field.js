@@ -122,13 +122,16 @@ const FormApp = {
             if (!this.errors.length) {
                 axios({
                     method : "POST",
-                    url:"{% url 'submitform' %}", //django path name
+                    // url:"{% url 'submitform' %}", //django path name
+                    url:"/api/fields/", 
                     headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
                     data : formData,
                 }).then(response => {
-                    this.success_msg = response.data['msg'];
+                    console.log(response);
+                    console.log(response.data);
                 }).catch(err => {
-                    this.err_msg = err.response.data['err'];
+                    this.err_msg = err.response.data;
+                    console.log(this.err_msg);
                 });
             }    
         },

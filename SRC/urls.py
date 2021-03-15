@@ -14,16 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views as src_views
 from farm import views as farm_views
+from farm import api_views
+
+router = routers.DefaultRouter()
+router.register(r'users', api_views.UserViewSet)
+router.register(r'groups', api_views.GroupViewSet)
+router.register(r'fields', api_views.FieldViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', src_views.home, name='home'),
-    path('field/', farm_views.field, name='field')
+    path('field/', farm_views.field, name='field'),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
