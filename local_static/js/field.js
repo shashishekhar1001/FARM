@@ -19,7 +19,8 @@ const FormApp = {
             username: null,
             success_msg: "",
             err_msg: "",
-            errors: []
+            errors: [],
+            fields: [],
         }
     },
     methods: {
@@ -129,9 +130,40 @@ const FormApp = {
                 }).then(response => {
                     console.log(response);
                     console.log(response.data);
+                    this.field_name= null;             
+                    this.field_sector= null;           
+                    this.field_area= null;           
+                    this.field_map= null;             
+                    this.field_7_12= null;             
+                    this.field_khate_utara= null;      
+                    this.field_owner_name= null;      
+                    this.field_owner_aadhar_no= null;  
+                    this.field_owner_aadhar_scan= null;
+                    this.field_owner_pan_no= null;     
+                    this.field_owner_pan_scan= null;   
+                    this.field_owner_pic= null;   
+                    this.field_owner_bank_scan= null; 
+                    this.field_owner_bank_acc_no= null;
+                    this.username= null;
+                    this.success_msg= "";
+                    this.err_msg= "";
+                    this.errors= [];
+                    document.getElementById("addField").reset();
+                    $('#exampleModal').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your field has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }).catch(err => {
-                    this.err_msg = err.response.data;
-                    console.log(this.err_msg);
+                    console.log(err);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed ...',
+                        text: err,
+                    })
                 });
             }    
         },
