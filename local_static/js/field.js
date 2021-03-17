@@ -23,6 +23,31 @@ const FormApp = {
             fields: [],
         }
     },
+    mounted() {
+        axios({
+            method : "GET",
+            url:"/api/fields/", 
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
+        }).then(response => {
+            console.log(response.data);
+            this.fields=response.data;
+            console.log(this.fields);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your fields have been loaded',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }).catch(err => {
+            console.log(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed Loading Data...',
+                text: err,
+            })
+        });
+    },
     methods: {
         handleFieldMapUpload(event) {
             this.field_map = event.target.files[0]
@@ -148,6 +173,7 @@ const FormApp = {
                     this.success_msg= "";
                     this.err_msg= "";
                     this.errors= [];
+                    this.fields.push(response.data);
                     document.getElementById("addField").reset();
                     $('#exampleModal').modal('hide');
                     Swal.fire({
@@ -166,6 +192,43 @@ const FormApp = {
                     })
                 });
             }    
+        },
+        deleteField: function (object, index) {
+            console.log(object.url);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    axios({
+                        method : "DELETE",
+                        url: object.url, 
+                        headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
+                    }).then(response => {
+                        console.log(response.data);
+                        this.fields.splice(index, 1);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your field has been deleted!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }).catch(err => {
+                        console.log(err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to delete ...',
+                            text: err,
+                        })
+                    });
+                }
+            });
         },
     },
 };

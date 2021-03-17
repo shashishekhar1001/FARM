@@ -235,10 +235,61 @@
                     </div>
                 </div>
 
-                <div class="panel-body">
-                    <div id="counter">
-                        Counter: [[err_msg]] 
-                    </div>  
+                <div class="field-card" v-for="(field, index) in fields">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                          <div class="col-md-4 text-center">
+                                <br>
+                                <div>
+                                    <img class="img-fluid img-thumbnail" v-bind:src="field.field_owner_pic" alt="..." style="height: 250px; width: 200px;">
+                                </div>
+                                <h4 class="card-text">[[field.field_owner_name]]</h4>
+                                <p class="card-text"><small class="text-muted">[[field.field_area]] Acres</small></p>
+                                <div class="row">
+                                    <div class="col-sm-6 d-grid gap-2 col-6 mx-auto">
+                                        <button type="button" class="btn btn-dark">Edit</button>
+                                    </div>
+                                    <div class="col-sm-6 d-grid gap-2 col-6 mx-auto">
+                                        <button type="button" class="btn btn-dark" v-on:click="deleteField(field, index)">Delete</button>
+                                    </div>
+                                </div>
+                                <br>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">[[field.field_sector]]</h5>
+                                <p class="card-text">Aadhaar No.:-[[field.field_owner_aadhar_no]]</p>
+                                <p class="card-text">PAN No.:-[[field.field_owner_pan_no]]</p>
+                                <p class="card-text">Bank Acc. No:-[[field.field_owner_bank_acc_no]]</p>
+                                <h5 class="card-title">Documents :-</h5>
+                                <div class="row">
+                                    <div class="col-md-4 d-grid mx-auto">
+                                        <a v-bind:href="field.field_map" class="btn btn-dark" target="_blank">Map</a>
+                                    </div>
+                                    <div class="col-md-4 d-grid mx-auto">
+                                        <a v-bind:href="field.field_khate_utara" class="btn btn-dark" target="_blank">Khate Utara</a>
+                                    </div>
+                                    <div class="col-md-4 d-grid mx-auto">
+                                        <a v-bind:href="field.field_7_12" class="btn btn-dark" target="_blank">7/12</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4 d-grid mx-auto">
+                                        <a v-bind:href="field.field_owner_aadhar_scan" class="btn btn-dark" target="_blank">Aadhaar</a>
+                                    </div>
+                                    <div class="col-md-4 d-grid mx-auto">
+                                        <a v-bind:href="field.field_owner_pan_scan" class="btn btn-dark" target="_blank">PAN</a>
+                                    </div>
+                                    <div class="col-md-4 d-grid mx-auto">
+                                        <a v-bind:href="field.field_owner_bank_scan" class="btn btn-dark" target="_blank">Bank Passbook</a>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <br>
                 </div>
             </main>
         </div>

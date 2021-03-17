@@ -19,6 +19,7 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Field
         fields = [
+            'url',
             'id',
             'field_name',             
             'field_sector',           
