@@ -103,14 +103,14 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Fields</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addModal">
                             Add &nbsp;&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Add Modal -->
+                <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -235,6 +235,133 @@
                     </div>
                 </div>
 
+                <!-- Edit Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Field</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div v-show="errors.length > 0">
+                                <div v-for="(error, index) in errors" :key="index">
+                                    <div class="alert alert-danger" role="alert">
+                                        [[ error ]]
+                                    </div>
+                                </div>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" id="editField">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="field_name" class="form-label">Field Name</label>
+                                            <input v-model="field_name" type="text" class="form-control" id="field_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="field_sector" class="form-label">Field Sector</label>
+                                            <input v-model="field_sector" type="text" class="form-control" id="field_sector" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="field_area" class="form-label">Field Area</label>
+                                            <input v-model="field_area" type="number" class="form-control" id="field_area" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="field_map" class="form-label">Field Map</label>
+                                            <input @change="handleFieldMapUpload" type="file" class="form-control" id="field_map" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="field_7_12" class="form-label">Field 7 / 12</label>
+                                            <input @change="handleField_7_12_Upload" type="file" class="form-control" id="field_7_12" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="field_khate_utara" class="form-label">Field Khate Utaara</label>
+                                    <input @change="handleFieldKhateUtaraUpload" type="file" class="form-control" id="field_khate_utara" required>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_name" class="form-label">Field Owner Name</label>
+                                            <input v-model="field_owner_name" type="text" class="form-control" id="field_owner_name" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_pic" class="form-label">Field Owner Picture</label>
+                                            <input @change="handleFieldOwnerPicUpload" type="file" class="form-control" id="field_owner_pic" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_aadhar_no" class="form-label">Aadhaar No.</label>
+                                            <input v-model="field_owner_aadhar_no" type="text" class="form-control" id="field_owner_aadhar_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_aadhar_scan" class="form-label">Aadhaar Scan</label>
+                                            <input @change="handleFieldOwnerAadharScanUpload" type="file" class="form-control" id="field_owner_aadhar_scan" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_pan_no" class="form-label">PAN No.</label>
+                                            <input  v-model="field_owner_pan_no" type="text" class="form-control" id="field_owner_pan_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_pan_scan" class="form-label">PAN Scan</label>
+                                            <input @change="handleFieldOwnerPanScanUpload" type="file" class="form-control" id="field_owner_pan_scan" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="mb-3">
+                                            <label for="field_owner_bank_acc_no" class="form-label">Bank Acc No.</label>
+                                            <input v-model="field_owner_bank_acc_no" type="text" class="form-control" id="field_owner_bank_acc_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="mb-3">
+                                            <label for="field_owner_bank_scan" class="form-label">Passbook Scan</label>
+                                            <input @change="handleFieldOwnerBankScanUpload" type="file" class="form-control" id="field_owner_bank_scan" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button v-on:click.prevent="submitEditForm" type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
                 <div class="field-card" v-for="(field, index) in fields">
                     <div class="card mb-3">
                         <div class="row g-0">
@@ -247,7 +374,7 @@
                                 <p class="card-text"><small class="text-muted">[[field.field_area]] Acres</small></p>
                                 <div class="row">
                                     <div class="col-sm-6 d-grid gap-2 col-6 mx-auto">
-                                        <button type="button" class="btn btn-dark">Edit</button>
+                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editModal" v-on:click="editField(field)">Edit</button>
                                     </div>
                                     <div class="col-sm-6 d-grid gap-2 col-6 mx-auto">
                                         <button type="button" class="btn btn-dark" v-on:click="deleteField(field, index)">Delete</button>
@@ -264,25 +391,25 @@
                                 <h5 class="card-title">Documents :-</h5>
                                 <div class="row">
                                     <div class="col-md-4 d-grid mx-auto">
-                                        <a v-bind:href="field.field_map" class="btn btn-dark" target="_blank">Map</a>
+                                        <a v-bind:href="field.field_map" class="btn btn-outline-dark" target="_blank">Map</a>
                                     </div>
                                     <div class="col-md-4 d-grid mx-auto">
-                                        <a v-bind:href="field.field_khate_utara" class="btn btn-dark" target="_blank">Khate Utara</a>
+                                        <a v-bind:href="field.field_khate_utara" class="btn btn-outline-dark" target="_blank">Khate Utara</a>
                                     </div>
                                     <div class="col-md-4 d-grid mx-auto">
-                                        <a v-bind:href="field.field_7_12" class="btn btn-dark" target="_blank">7/12</a>
+                                        <a v-bind:href="field.field_7_12" class="btn btn-outline-dark" target="_blank">7/12</a>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-4 d-grid mx-auto">
-                                        <a v-bind:href="field.field_owner_aadhar_scan" class="btn btn-dark" target="_blank">Aadhaar</a>
+                                        <a v-bind:href="field.field_owner_aadhar_scan" class="btn btn-outline-dark" target="_blank">Aadhaar</a>
                                     </div>
                                     <div class="col-md-4 d-grid mx-auto">
-                                        <a v-bind:href="field.field_owner_pan_scan" class="btn btn-dark" target="_blank">PAN</a>
+                                        <a v-bind:href="field.field_owner_pan_scan" class="btn btn-outline-dark" target="_blank">PAN</a>
                                     </div>
                                     <div class="col-md-4 d-grid mx-auto">
-                                        <a v-bind:href="field.field_owner_bank_scan" class="btn btn-dark" target="_blank">Bank Passbook</a>
+                                        <a v-bind:href="field.field_owner_bank_scan" class="btn btn-outline-dark" target="_blank">Bank Passbook</a>
                                     </div>
                                 </div>
                             </div>
