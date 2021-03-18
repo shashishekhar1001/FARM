@@ -4,3 +4,7 @@ from django.shortcuts import render
 def field(request):
     context = {}
     return render(request, "field.html", context)
+
+def water(request):
+    context = {}
+    return render(request, "water.html", context)

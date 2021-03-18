@@ -30,6 +30,11 @@ class Water(models.Model):
         ('DRIP', 'Drip'),
     ]
     mode                       = models.CharField(max_length=8, choices=WATER_IRRIGATION_MODE)                 
+    SOURCE_OPTIONS = [
+        ('WELL', 'WELL'),
+        ('BORE WELL', 'BORE WELL'),
+    ]
+    source                     = models.CharField(max_length=20, choices=SOURCE_OPTIONS, default="WELL")                 
 
     def __str__(self):
         return self.field

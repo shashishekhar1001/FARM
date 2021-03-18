@@ -36,3 +36,16 @@ class FieldSerializer(serializers.HyperlinkedModelSerializer):
             'field_owner_bank_scan',  
             'field_owner_bank_acc_no'
         ]
+
+class WaterSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Water
+        fields = [
+            'url',
+            'id',
+            'field',
+            'start',
+            'end',
+            'mode',
+            'source'
+        ]

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from .models import *
-from .serializers import UserSerializer, GroupSerializer, FieldSerializer
+from .serializers import UserSerializer, GroupSerializer, FieldSerializer, WaterSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -28,4 +28,13 @@ class FieldViewSet(viewsets.ModelViewSet):
     """
     queryset = Field.objects.all()
     serializer_class = FieldSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class WaterViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Water to be viewed or edited.
+    """
+    queryset = Water.objects.all()
+    serializer_class = WaterSerializer
     permission_classes = [permissions.IsAuthenticated]
