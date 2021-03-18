@@ -23,7 +23,7 @@
 </header>
 
 <div id="app">
-    <div class="container-fluid" id="water">
+    <div class="container-fluid" id="waterMgmt">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky pt-3">
@@ -118,7 +118,39 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        
+                            <form>
+                                <div class="mb-3">
+                                    <label for="selectField" class="form-label">Field</label>
+                                    <select class="form-select" id="selectField" aria-label="Select Field">
+                                        <div v-for="(field, index) in fields" :key="index">    
+                                            <option value="1">[[field.field_name]]</option>
+                                        </div>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="waterStart">Start (date and time):</label>
+                                    <input class="form-control" type="datetime-local" id="waterStart" name="waterStart">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="waterEnd">End (date and time):</label>
+                                    <input class="form-control" type="datetime-local" id="waterEnd" name="waterEnd">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="selectMode" class="form-label">Mode</label>
+                                    <select class="form-select" id="selectMode" aria-label="Select Mode">
+                                        <option value="DIRECT">Direct</option>
+                                        <option value="DRIP">Drip</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="source" class="form-label">Source</label>
+                                    <select class="form-select" id="source" aria-label="source">
+                                        <option value="WELL">WELL</option>
+                                        <option value="BORE WELL">BORE WELL</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                     </div>
                     </div>
@@ -127,7 +159,9 @@
 
 
                 <div class="panel-body">
-                    <h1>[[field_name]]</h1>
+                    <div v-for="(field, index) in fields" :key="index">    
+                        <h1>[[field.field_name]]</h1>
+                    </div>
                 </div>
                 
             </main>

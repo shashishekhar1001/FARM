@@ -2,7 +2,8 @@ const FormApp = {
     delimiters: ['[[', ']]'],
     data() {
         return {
-            field_name: "HI",    
+            fields: null,
+            waters: null,
         }
     },
     mounted() {
@@ -11,9 +12,8 @@ const FormApp = {
             url:"/api/waters/", 
             headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
         }).then(response => {
-            console.log(response.data);
-            this.fields=response.data;
-            console.log(this.fields);
+            this.waters=response.data;
+            console.log(this.waters);
         }).catch(err => {
             console.log(err);
             Swal.fire({
@@ -28,7 +28,6 @@ const FormApp = {
             url:"/api/fields/", 
             headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
         }).then(response => {
-            console.log(response.data);
             this.fields=response.data;
             console.log(this.fields);
             Swal.fire({
@@ -36,7 +35,7 @@ const FormApp = {
                 icon: 'success',
                 title: 'Your fields & waters have been loaded',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1000
             });
         }).catch(err => {
             console.log(err);
@@ -52,4 +51,4 @@ const FormApp = {
         
 };
 
-Vue.createApp(FormApp).mount('#water')
+Vue.createApp(FormApp).mount('#waterMgmt')
