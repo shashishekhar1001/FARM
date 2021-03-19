@@ -2,7 +2,26 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from .models import *
+from rest_framework.pagination import PageNumberPagination
 from .serializers import UserSerializer, GroupSerializer, FieldSerializer, WaterSerializer
+
+
+class LargeResultsSetPagination(PageNumberPagination):
+    page_size = 1000
+    page_size_query_param = 'page_size'
+    max_page_size = 10000
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
+
+class SmallResultsSetPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -38,3 +57,4 @@ class WaterViewSet(viewsets.ModelViewSet):
     queryset = Water.objects.all()
     serializer_class = WaterSerializer
     permission_classes = [permissions.IsAuthenticated]
+    pagination_class = SmallResultsSetPagination

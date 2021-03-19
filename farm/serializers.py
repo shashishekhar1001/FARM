@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_framework.pagination import PageNumberPagination
 from .models import *
-
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

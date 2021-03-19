@@ -37,7 +37,7 @@ class Water(models.Model):
     source                     = models.CharField(max_length=20, choices=SOURCE_OPTIONS, default="WELL")                 
 
     def __str__(self):
-        return self.field
+        return str(self.start)
 
 
 class Expense(models.Model):

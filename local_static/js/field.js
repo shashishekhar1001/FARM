@@ -175,7 +175,7 @@ const FormApp = {
                     this.success_msg= "";
                     this.err_msg= "";
                     this.errors= [];
-                    this.fields.push(response.data);
+                    this.fields.unshift(response.data);
                     document.getElementById("addField").reset();
                     $('#addModal').modal('hide');
                     Swal.fire({
@@ -335,7 +335,6 @@ const FormApp = {
             this.field_owner_bank_acc_no=object.field_owner_bank_acc_no;
             this.edit_url = object.url;
             this.index=index;
-            console.log("KU");
             console.log(this.edit_url);
         },
         deleteField: function (object, index) {
