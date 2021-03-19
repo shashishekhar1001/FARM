@@ -44,6 +44,7 @@ class Expense(models.Model):
     field                      = models.ForeignKey(Field, on_delete=models.CASCADE)
     date                       = models.DateField()
     description                = models.TextField()
+    amount                     = models.IntegerField(default=0)
     
     def __str__(self):
         return self.field

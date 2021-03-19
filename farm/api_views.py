@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .models import *
 from rest_framework.pagination import PageNumberPagination
-from .serializers import UserSerializer, GroupSerializer, FieldSerializer, WaterSerializer
+from .serializers import UserSerializer, GroupSerializer, FieldSerializer, WaterSerializer, ExpenseSerializer
 
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -54,7 +54,17 @@ class WaterViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Water to be viewed or edited.
     """
-    queryset = Water.objects.all()
+    queryset = Water.objects.all().order_by('-id')
     serializer_class = WaterSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = SmallResultsSetPagination
+
+
+class ExpenseViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Water to be viewed or edited.
+    """
+    queryset = Expense.objects.all().order_by('-id')
+    serializer_class = ExpenseSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = SmallResultsSetPagination

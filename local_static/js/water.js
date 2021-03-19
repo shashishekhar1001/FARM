@@ -7,7 +7,7 @@ const WaterApp = {
             field_url: null,
             start: null,
             end: null,
-            model: null,
+            mode: null,
             source: null,
             errors: [],
             next_page: null,

@@ -27,12 +27,14 @@ router.register(r'users', api_views.UserViewSet)
 router.register(r'groups', api_views.GroupViewSet)
 router.register(r'fields', api_views.FieldViewSet)
 router.register(r'waters', api_views.WaterViewSet)
+router.register(r'expenses', api_views.ExpenseViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', src_views.home, name='home'),
     path('field/', farm_views.field, name='field'),
     path('water/', farm_views.water, name='water'),
+    path('expense/', farm_views.expense, name='expense'),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] 

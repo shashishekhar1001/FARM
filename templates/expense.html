@@ -23,7 +23,7 @@
 </header>
 
 <div id="app">
-    <div class="container-fluid" id="waterMgmt">
+    <div class="container-fluid" id="ExpenseMgmt">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky pt-3">
@@ -40,14 +40,14 @@
                                 Fields
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active">
+                        <li class="nav-item" href="/water">
+                            <a class="nav-link ">
                                 <i class="fa fa-shower" aria-hidden="true"></i>
                                 Water 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/expense">
+                            <a class="nav-link active">
                                 <i class="fa fa-inr" aria-hidden="true"></i>
                                 Expenses
                             </a>
@@ -101,26 +101,24 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Water</h1>
+                    <h1 class="h2">Expense</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary" v-show="prev_page" v-on:click="show_prev">Previous</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary" v-show="next_page" v-on:click="show_next">Next</button>
                         </div>
-                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addWaterModal">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
                             Add &nbsp;&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
-                        
-
                     </div>
                 </div>
 
                 <!-- Add Modal -->
-                <div class="modal fade" id="addWaterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addExpenseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Water Record</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Expense Record</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -131,35 +129,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" id="addWater" v-on:submit.prevent="onAddWater">
+                            <form method="POST" id="addExpense" v-on:submit.prevent="onAddExpense">
+                                <div class="mb-3">
+                                    <label for="date">Date:</label>
+                                    <input v-model="date" class="form-control" type="date" id="date" name="date">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea v-model="description" id="description" name="description" class="form-control"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">Amount</label>
+                                    <input v-model="amount" name="amount" class="form-control" type="number" id="amount" value="">
+                                </div>
                                 <div class="mb-3">
                                     <label for="selectField" class="form-label">Field</label>
                                     <select v-model="field_url" class="form-select" id="selectField" aria-label="Select Field">
                                         <option v-for="field in fields" v-bind:value="field.url">
                                           [[ field.field_sector ]]
                                         </option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="waterStart">Start (date and time):</label>
-                                    <input v-model="start" class="form-control" type="datetime-local" id="waterStart" name="waterStart">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="waterEnd">End (date and time):</label>
-                                    <input v-model="end" class="form-control" type="datetime-local" id="waterEnd" name="waterEnd">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="selectMode" class="form-label">Mode</label>
-                                    <select v-model="mode" class="form-select" id="selectMode" aria-label="Select Mode">
-                                        <option value="DIRECT">Direct</option>
-                                        <option value="DRIP">Drip</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="source" class="form-label">Source</label>
-                                    <select v-model="source" class="form-select" id="source" aria-label="source">
-                                        <option value="WELL">WELL</option>
-                                        <option value="BORE WELL">BORE WELL</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -170,12 +158,12 @@
                 </div>
                 <!-- End Add Modal -->
 
-                <!-- Edit Water Model -->
-                <div class="modal fade" id="editWaterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Edit Expense Model -->
+                <div class="modal fade" id="editExpenseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Water Record</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Expense Record</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -186,7 +174,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" id="editWater" v-on:submit.prevent="onEditWater">
+                            <form method="POST" id="editExpense" v-on:submit.prevent="onEditExpense">
+                                <div class="mb-3">
+                                    <label for="date">Date:</label>
+                                    <input v-model="date" class="form-control" type="date" id="date" name="date">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea v-model="description" id="description" name="description" class="form-control"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">Amount</label>
+                                    <input v-model="amount" name="amount" class="form-control" type="number" id="amount" value="">
+                                </div>
                                 <div class="mb-3">
                                     <label for="selectField" class="form-label">Field</label>
                                     <select v-model="field_url" class="form-select" id="selectField" aria-label="Select Field">
@@ -195,62 +195,38 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="waterStart">Start (date and time):</label>
-                                    <input v-model="start" class="form-control" type="datetime-local" id="waterStart" name="waterStart">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="waterEnd">End (date and time):</label>
-                                    <input v-model="end" class="form-control" type="datetime-local" id="waterEnd" name="waterEnd">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="selectMode" class="form-label">Mode</label>
-                                    <select v-model="mode" class="form-select" id="selectMode" aria-label="Select Mode">
-                                        <option value="DIRECT">Direct</option>
-                                        <option value="DRIP">Drip</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="source" class="form-label">Source</label>
-                                    <select v-model="source" class="form-select" id="source" aria-label="source">
-                                        <option value="WELL">WELL</option>
-                                        <option value="BORE WELL">BORE WELL</option>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
                     </div>
                 </div>
-                <!-- Edit Water Model -->
+                <!-- Edit Expense Model -->
 
                 <div class="panel-body">
                     <table class="table">
                         <thead class="thead-dark">
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Start</th>
-                            <th scope="col">End</th>
-                            <th scope="col">Source</th>
-                            <th scope="col">Mode</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Amount</th>
                             <th scope="col">Field</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(water,index) in waters" :key="index">
+                            <tr v-for="(expense, index) in expenses" :key="index">
                                 <th scope="row">[[ index+1 ]]</th>  
-                                <td>[[ water.start ]]</td> 
-                                <td>[[ water.end ]]</td>  
-                                <td>[[ water.source ]]</td>  
-                                <td>[[ water.mode ]]</td>  
-                                <td>[[ water.field_name ]]</td>  
+                                <td>[[ expense.date ]]</td> 
+                                <td>[[ expense.description ]]</td>  
+                                <td>[[ expense.amount ]]</td>  
+                                <td>[[ expense.field_name ]]</td>  
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-success" v-on:click="editWater(water, index)" data-bs-toggle="modal" data-bs-target="#editWaterModal">
+                                    <button type="button" class="btn btn-sm btn-success" v-on:click="editExpense(expense, index)" data-bs-toggle="modal" data-bs-target="#editExpenseModal">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button>&nbsp;
-                                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteWater(water, index)">
+                                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteExpense(expense, index)">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                 </td>  
@@ -267,5 +243,5 @@
 
 
 {% block 'script' %}
-<script src="/static/js/water.js"></script>
+<script src="/static/js/expense.js"></script>
 {% endblock %}

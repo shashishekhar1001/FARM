@@ -8,3 +8,7 @@ def field(request):
 def water(request):
     context = {}
     return render(request, "water.html", context)
+
+def expense(request):
+    context = {}
+    return render(request, "expense.html", context)

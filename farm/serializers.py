@@ -49,3 +49,16 @@ class WaterSerializer(serializers.HyperlinkedModelSerializer):
             'mode',
             'source'
         ]
+
+        
+class ExpenseSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Expense
+        fields = [
+            'url',
+            'id',
+            'field',
+            'date',
+            'description',
+            'amount',
+        ]
