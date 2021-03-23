@@ -62,3 +62,26 @@ class ExpenseSerializer(serializers.HyperlinkedModelSerializer):
             'description',
             'amount',
         ]
+
+
+class SaleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Sale
+        fields = [
+            'url',
+            'id',
+            'date',
+            'description',
+            'crop',
+            'rate',
+            'total_bill',
+            'quantity_uom',
+            'quantity',
+            'reciept',
+            'purchased_by',
+            'purchaser_contact',
+            'sale_order',
+            'paid_amt',
+            'pending_amt',
+            'status',
+        ]

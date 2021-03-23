@@ -28,6 +28,7 @@ router.register(r'groups', api_views.GroupViewSet)
 router.register(r'fields', api_views.FieldViewSet)
 router.register(r'waters', api_views.WaterViewSet)
 router.register(r'expenses', api_views.ExpenseViewSet)
+router.register(r'sales', api_views.SaleViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('field/', farm_views.field, name='field'),
     path('water/', farm_views.water, name='water'),
     path('expense/', farm_views.expense, name='expense'),
+    path('sale/', farm_views.sale, name='sale'),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ] 

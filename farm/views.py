@@ -12,3 +12,7 @@ def water(request):
 def expense(request):
     context = {}
     return render(request, "expense.html", context)
+
+def sale(request):
+    context = {}
+    return render(request, "sale.html", context)

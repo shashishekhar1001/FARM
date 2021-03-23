@@ -78,19 +78,19 @@ class Sale(models.Model):
     date                       = models.DateField()
     description                = models.TextField()
     CROP_SOLD = [
-        ('SUGARCANE', 'Sugarcane'),
-        ('SOYABEAN', 'Soyabean'),
-        ('OKRA', 'Okra'),
-        ('ZUCHHINI', 'Zucchini'),
-        ('CHILLY', 'Chilly'),
+        ('SUGARCANE', 'SUGARCANE'),
+        ('SOYABEAN', 'SOYABEAN'),
+        ('OKRA', 'OKRA'),
+        ('ZUCHHINI', 'ZUCHHINI'),
+        ('CHILLY', 'CHILLY'),
     ]
     crop                       = models.CharField(max_length=30, choices=CROP_SOLD) 
     rate                       = models.IntegerField()
     total_bill                 = models.IntegerField(default=-1, editable=False)
     QUANTITY_UOM = [
-        ('KILOS', 'Kilos'),
-        ('QUINTALS', 'Quintals'),
-        ('TONNES', 'Tonnes'),
+        ('KILOS', 'KILOS'),
+        ('QUINTALS', 'QUINTALS'),
+        ('TONNES', 'TONNES'),
     ]
     quantity_uom               = models.CharField(max_length=30, choices=QUANTITY_UOM) 
     quantity                   = models.IntegerField()
@@ -131,15 +131,15 @@ class Purchase(models.Model):
     date                       = models.DateField()
     description                = models.TextField()
     CROP_PURCHASED = [
-        ('SOYABEAN', 'Soyabean'),
+        ('SOYABEAN', 'SOYABEAN'),
     ]
     crop                       = models.CharField(max_length=30, choices=CROP_PURCHASED) 
     rate                       = models.IntegerField()
     total_bill                 = models.IntegerField(default=-1, editable=False)
     QUANTITY_UOM = [
-        ('KILOS', 'Kilos'),
-        ('QUINTALS', 'Quintals'),
-        ('TONNES', 'Tonnes'),
+        ('KILOS', 'KILOS'),
+        ('QUINTALS', 'QUINTALS'),
+        ('TONNES', 'TONNES'),
     ]
     quantity_uom               = models.CharField(max_length=30, choices=QUANTITY_UOM) 
     quantity                   = models.IntegerField()
