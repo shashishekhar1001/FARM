@@ -107,14 +107,14 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary" v-show="prev_page" v-on:click="show_prev">Previous</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary" v-show="next_page" v-on:click="show_next">Next</button>
                         </div>
-                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addSaleModal">
                             Add &nbsp;&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Add Modal -->
-                <div class="modal fade" id="addExpenseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addSaleModal" enctype="multipart/form-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" id="addExpense" v-on:submit.prevent="onAddExpense">
+                            <form method="POST" id="addSale" v-on:submit.prevent="onAddSale">
                                 <div class="mb-3">
                                     <label for="date">Date:</label>
                                     <input v-model="date" class="form-control" type="date" id="date" name="date">
@@ -139,17 +139,63 @@
                                     <textarea v-model="description" id="description" name="description" class="form-control"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="amount" class="form-label">Amount</label>
-                                    <input v-model="amount" name="amount" class="form-control" type="number" id="amount" value="">
+                                    <label for="crop" class="form-label">Crop</label>
+                                    <select v-model="crop" class="form-select"  name="crop" id="crop">
+                                        <option value="SUGARCANE">SUGARCANE</option>
+                                        <option value="SOYABEAN">SOYABEAN</option>                          
+                                        <option value="OKRA">OKRA</option>
+                                        <option value="ZUCHHINI">ZUCHHINI</option>
+                                        <option value="CHILLY">CHILLY</option>
+                                   </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="selectField" class="form-label">Field</label>
-                                    <select v-model="field_url" class="form-select" id="selectField" aria-label="Select Field">
-                                        <option v-for="field in fields" v-bind:value="field.url">
-                                          [[ field.field_sector ]]
-                                        </option>
-                                    </select>
+                                    <label for="rate" class="form-label">Rate</label>
+                                    <input v-model="rate" name="rate" class="form-control" type="number" id="rate">
                                 </div>
+                                <div class="mb-3">
+                                    <label for="total_bill" class="form-label">Total Bill</label>
+                                    <input v-model="total_bill" name="total_bill" class="form-control" type="number" id="total_bill">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="quantity_uom" class="form-label">Quantity UOM</label>
+                                    <select v-model="quantity_uom" class="form-select"  name="quantity_uom" id="quantity_uom">
+                                        <option value="KILOS">KILOS</option>
+                                        <option value="QUINTALS">QUINTALS</option>
+                                        <option value="TONNES">TONNES</option>
+                                   </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="quantity" class="form-label">Quantity</label>
+                                    <input v-model="quantity" name="quantity" class="form-control" type="number" id="quantity">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="reciept" class="form-label">Reciept</label>
+                                    <input @change="handleRecieptUpload" type="file" class="form-control" id="reciept" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="purchased_by" class="form-label">Purchased By</label>
+                                    <input v-model="purchased_by" type="text" class="form-control" id="purchased_by" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="purchaser_contact" class="form-label">Purchaser Contact</label>
+                                    <input v-model="purchaser_contact" type="text" class="form-control" id="purchaser_contact" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="paid_amt" class="form-label">Paid Amt.</label>
+                                    <input v-model="paid_amt" name="paid_amt" class="form-control" type="number" id="paid_amt">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pending_amt" class="form-label">Pending Amt.</label>
+                                    <input v-model="pending_amt" name="pending_amt" class="form-control" type="number" id="pending_amt">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select v-model="status" class="form-select"  name="status" id="status">
+                                        <option value="PENDING">PENDING</option>
+                                        <option value="PAID">PAID</option>
+                                   </select>
+                                </div>
+                                
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
@@ -201,7 +247,7 @@
                     </div>
                     </div>
                 </div>
-                <!-- Edit Expense Model -->
+                <!-- End Edit Expense Model -->
 
                 <div class="panel-body">
                     <table class="table">
@@ -250,7 +296,7 @@
                                     <button type="button" class="btn btn-sm btn-success" v-on:click="editExpense(expense, index)" data-bs-toggle="modal" data-bs-target="#editExpenseModal">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button>&nbsp;
-                                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteExpense(expense, index)">
+                                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteSale(sale, index)">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                 </td>  
