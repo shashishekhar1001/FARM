@@ -85,3 +85,12 @@ class SaleSerializer(serializers.HyperlinkedModelSerializer):
             'pending_amt',
             'status',
         ]
+
+    def create(self, validated_data):
+        so = Sale.objects.create(**validated_data)
+        print("API:-")
+        so.total_bill = so.rate * so.quantity 
+        so.sale_order = "SO" + str(so.id)
+        print(so.total_bill)
+        # so.save()
+        return so  

@@ -78,3 +78,5 @@ class SaleViewSet(viewsets.ModelViewSet):
     serializer_class = SaleSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = SmallResultsSetPagination
+
+    

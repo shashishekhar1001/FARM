@@ -167,6 +167,7 @@ const SaleApp = {
                 url: url, 
                 headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
             }).then(response => {
+                console.log(response.data);
                 this.sales=response.data.results;
                 this.next_page=response.data.next;
                 this.prev_page=response.data.previous;
