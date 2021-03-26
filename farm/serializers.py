@@ -88,9 +88,28 @@ class SaleSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         so = Sale.objects.create(**validated_data)
-        print("API:-")
         so.total_bill = so.rate * so.quantity 
         so.sale_order = "SO" + str(so.id)
-        print(so.total_bill)
         # so.save()
         return so  
+
+    def update(self, instance, validated_data):
+        print("API:-")
+        instance.date = validated_data.get('date', instance.date)
+        instance.description = validated_data.get('description', instance.description)
+        instance.crop = validated_data.get('crop', instance.crop)
+        instance.rate = validated_data.get('rate', instance.rate)
+        instance.total_bill = validated_data.get('total_bill', instance.total_bill)
+        instance.quantity_uom = validated_data.get('quantity_uom', instance.quantity_uom)
+        instance.quantity = validated_data.get('quantity', instance.quantity)
+        instance.reciept = validated_data.get('reciept', instance.reciept)
+        instance.purchased_by = validated_data.get('purchased_by', instance.purchased_by)
+        instance.purchaser_contact = validated_data.get('purchaser_contact', instance.purchaser_contact)
+        instance.sale_order = "SO" + str(instance.id)
+        instance.paid_amt = validated_data.get('paid_amt', instance.paid_amt)
+        instance.pending_amt = validated_data.get('pending_amt', instance.pending_amt)
+        instance.status = validated_data.get('status', instance.status)
+        print(instance.sale_order)
+        instance.save()
+        return instance
+    
