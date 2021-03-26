@@ -16,3 +16,7 @@ def expense(request):
 def sale(request):
     context = {}
     return render(request, "sale.html", context)
+
+def purchase(request):
+    context = {}
+    return render(request, "purchase.html", context)

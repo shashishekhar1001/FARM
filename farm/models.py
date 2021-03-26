@@ -143,6 +143,7 @@ class Purchase(models.Model):
     ]
     quantity_uom               = models.CharField(max_length=30, choices=QUANTITY_UOM) 
     quantity                   = models.IntegerField()
+    reciept                    = models.FileField(upload_to="purchase_receipt/", blank=True, null=True)
     sold_by                    = models.CharField(max_length=40)
     seller_contact             = models.CharField(max_length=40)
     purchase_order             = models.CharField(max_length=40, default="PO", unique=True, editable=False)

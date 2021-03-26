@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .models import *
 from rest_framework.pagination import PageNumberPagination
-from .serializers import UserSerializer, GroupSerializer, FieldSerializer, WaterSerializer, ExpenseSerializer, SaleSerializer
+from .serializers import UserSerializer, GroupSerializer, FieldSerializer, WaterSerializer, ExpenseSerializer, SaleSerializer, PurchaseSerializer
 
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -79,4 +79,13 @@ class SaleViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = SmallResultsSetPagination
 
-    
+
+class PurchaseViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Purchase to be viewed or edited.
+    """
+    queryset = Purchase.objects.all().order_by('-id')
+    serializer_class = PurchaseSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = SmallResultsSetPagination
+
