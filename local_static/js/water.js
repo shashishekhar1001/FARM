@@ -13,6 +13,11 @@ const WaterApp = {
             next_page: null,
             prev_page: null,
             req_url: "/api/waters/", 
+            count: null,
+            no_of_pages: null,
+            page_size: 3,
+            page_url: null,
+            current_page: 1,
         }
     },
     mounted() {
@@ -159,6 +164,12 @@ const WaterApp = {
             this.getAllData(this.next_page);
         },
 
+        show_page(number) {
+            this.page_url = this.req_url.concat("?page=").concat(number);
+            this.getAllData(this.page_url);
+            this.current_page = number;
+        },
+
         getAllData: function (url) {
             axios({
                 method : "GET",
@@ -168,6 +179,12 @@ const WaterApp = {
                 this.waters=response.data.results;
                 this.next_page=response.data.next;
                 this.prev_page=response.data.previous;
+                this.count=response.data.count;
+                if (this.count > this.page_size) {
+                    console.log("Show Page No's.");
+                    this.no_of_pages=Math.ceil(this.count / this.page_size);
+                    console.log(this.no_of_pages);
+                }
                 console.log(this.next_page);
                 console.log(this.prev_page);
                 axios({
