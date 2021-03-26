@@ -12,6 +12,11 @@ const ExpenseApp = {
             description: null,
             amount: null,
             req_url: "/api/expenses/", 
+            count: null,
+            no_of_pages: null,
+            page_size: 3,
+            page_url: null,
+            current_page: 1,
         }
     },
     mounted() {
@@ -27,6 +32,12 @@ const ExpenseApp = {
                 this.expenses=response.data.results;
                 this.next_page=response.data.next;
                 this.prev_page=response.data.previous;
+                this.count=response.data.count;
+                if (this.count > this.page_size) {
+                    console.log("Show Page No's.");
+                    this.no_of_pages=Math.ceil(this.count / this.page_size);
+                    console.log(this.no_of_pages);
+                }
                 console.log(this.next_page);
                 console.log(this.prev_page);
                 axios({
@@ -180,6 +191,12 @@ const ExpenseApp = {
                     })
                 });
             }
+        },
+
+        show_page(number) {
+            this.page_url = this.req_url.concat("?page=").concat(number);
+            this.getAllData(this.page_url);
+            this.current_page = number;
         },
 
         editExpense: function(object, index){
