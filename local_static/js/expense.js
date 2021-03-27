@@ -84,11 +84,13 @@ const ExpenseApp = {
         show_prev: function (){
             console.log("Show Previous");
             this.getAllData(this.prev_page);
+            this.current_page = this.current_page - 1;
         },
 
         show_next: function (){
             console.log("Show Next");
             this.getAllData(this.next_page);
+            this.current_page = this.current_page + 1;
         },
 
         deleteExpense: function(object, index){
