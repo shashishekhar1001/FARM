@@ -107,18 +107,18 @@
                             <!-- <button type="button" class="btn btn-sm btn-outline-secondary" v-show="prev_page" v-on:click="show_prev">Previous</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary" v-show="next_page" v-on:click="show_next">Next</button> -->
                         </div>
-                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addSaleModal">
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">
                             Add &nbsp;&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Add Modal -->
-                <div class="modal fade" id="addSaleModal" enctype="multipart/form-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addPurchaseModal" enctype="multipart/form-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Sale Record</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add purchase Record</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" id="addSale" v-on:submit.prevent="onAddSale">
+                            <form method="POST" id="addPurchase" v-on:submit.prevent="onAddPurchase">
                                 <div class="mb-3">
                                     <label for="date">Date:</label>
                                     <input v-model="date" class="form-control" type="date" id="date" name="date">
@@ -141,11 +141,11 @@
                                 <div class="mb-3">
                                     <label for="crop" class="form-label">Crop</label>
                                     <select v-model="crop" class="form-select"  name="crop" id="crop">
-                                        <option value="SUGARCANE">SUGARCANE</option>
+                                        <!-- <option value="SUGARCANE">SUGARCANE</option> -->
                                         <option value="SOYABEAN">SOYABEAN</option>                          
-                                        <option value="OKRA">OKRA</option>
+                                        <!-- <option value="OKRA">OKRA</option>
                                         <option value="ZUCHHINI">ZUCHHINI</option>
-                                        <option value="CHILLY">CHILLY</option>
+                                        <option value="CHILLY">CHILLY</option> -->
                                    </select>
                                 </div>
                                 <div class="mb-3">
@@ -173,12 +173,12 @@
                                     <input @change="handleRecieptUpload" type="file" class="form-control" id="reciept" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="purchased_by" class="form-label">Purchased By</label>
-                                    <input v-model="purchased_by" type="text" class="form-control" id="purchased_by" required>
+                                    <label for="sold_by" class="form-label">Sold By</label>
+                                    <input v-model="sold_by" type="text" class="form-control" id="sold_by" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="purchaser_contact" class="form-label">Purchaser Contact</label>
-                                    <input v-model="purchaser_contact" type="text" class="form-control" id="purchaser_contact" required>
+                                    <label for="seller_contact" class="form-label">Seller Contact</label>
+                                    <input v-model="seller_contact" type="text" class="form-control" id="seller_contact" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="paid_amt" class="form-label">Paid Amt.</label>
@@ -204,12 +204,12 @@
                 </div>
                 <!-- End Add Modal -->
 
-                <!-- Edit Sale Modal -->
-                <div class="modal fade" id="editSaleModal" enctype="multipart/form-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Edit purchase Modal -->
+                <div class="modal fade" id="editpurchaseModal" enctype="multipart/form-data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Sale Record</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit purchase Record</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" id="editSale" v-on:submit.prevent="onEditSale">
+                            <form method="POST" id="editPurchase" v-on:submit.prevent="onEditPurchase">
                                 <div class="mb-3">
                                     <label for="date">Date:</label>
                                     <input v-model="date" class="form-control" type="date" id="date" name="date">
@@ -232,11 +232,11 @@
                                 <div class="mb-3">
                                     <label for="crop" class="form-label">Crop</label>
                                     <select v-model="crop" class="form-select"  name="crop" id="crop">
-                                        <option value="SUGARCANE">SUGARCANE</option>
+                                        <!-- <option value="SUGARCANE">SUGARCANE</option> -->
                                         <option value="SOYABEAN">SOYABEAN</option>                          
-                                        <option value="OKRA">OKRA</option>
+                                        <!-- <option value="OKRA">OKRA</option>
                                         <option value="ZUCHHINI">ZUCHHINI</option>
-                                        <option value="CHILLY">CHILLY</option>
+                                        <option value="CHILLY">CHILLY</option> -->
                                    </select>
                                 </div>
                                 <div class="mb-3">
@@ -264,12 +264,12 @@
                                     <input @change="handleRecieptUpload" type="file" class="form-control" id="reciept" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="purchased_by" class="form-label">Purchased By</label>
-                                    <input v-model="purchased_by" type="text" class="form-control" id="purchased_by" required>
+                                    <label for="sold_by" class="form-label">Sold By</label>
+                                    <input v-model="sold_by" type="text" class="form-control" id="sold_by" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="purchaser_contact" class="form-label">Purchaser Contact</label>
-                                    <input v-model="purchaser_contact" type="text" class="form-control" id="purchaser_contact" required>
+                                    <label for="seller_contact" class="form-label">Seller Contact</label>
+                                    <input v-model="seller_contact" type="text" class="form-control" id="seller_contact" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="paid_amt" class="form-label">Paid Amt.</label>
@@ -293,7 +293,7 @@
                     </div>
                     </div>
                 </div>
-                <!-- End Edit Sale Model -->
+                <!-- End Edit purchase Model -->
 
                 <div class="panel-body">
                     <table class="table">
@@ -308,9 +308,9 @@
                             <th scope="col">Qty UOM</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Receipt</th>
-                            <th scope="col">Purchased By</th>
-                            <th scope="col">Purchaser #</th>
-                            <th scope="col">SO</th>
+                            <th scope="col">Sold By</th>
+                            <th scope="col">Seller #</th>
+                            <th scope="col">PO</th>
                             <th scope="col">Paid Amt.</th>
                             <th scope="col">Pending Amt.</th>
                             <th scope="col">Status</th>
@@ -318,31 +318,31 @@
                           </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(sale, index) in sales" :key="index">
+                            <tr v-for="(purchase, index) in purchases" :key="index">
                                 <th scope="row">[[ index+1 ]]</th>  
-                                <td>[[ sale.date ]]</td>
-                                <td>[[ sale.description ]]</td>
-                                <td>[[ sale.crop ]]</td>
-                                <td>[[ sale.rate ]]</td>
-                                <td>[[ sale.total_bill ]]</td>
-                                <td>[[ sale.quantity_uom ]]</td>
-                                <td>[[ sale.quantity ]]</td>
+                                <td>[[ purchase.date ]]</td>
+                                <td>[[ purchase.description ]]</td>
+                                <td>[[ purchase.crop ]]</td>
+                                <td>[[ purchase.rate ]]</td>
+                                <td>[[ purchase.total_bill ]]</td>
+                                <td>[[ purchase.quantity_uom ]]</td>
+                                <td>[[ purchase.quantity ]]</td>
                                 <td>
-                                    <a v-bind:href="sale.reciept" class="btn btn-primary btn-sm" target="_blank">
+                                    <a v-bind:href="purchase.reciept" class="btn btn-primary btn-sm" target="_blank">
                                         <i class="fa fa-download" aria-hidden="true"></i>
                                     </a>
                                 </td>
-                                <td>[[ sale.purchased_by ]]</td>
-                                <td>[[ sale.purchaser_contact ]]</td>
-                                <td>[[ sale.sale_order ]]</td>
-                                <td>[[ sale.paid_amt ]]</td>
-                                <td>[[ sale.pending_amt ]]</td>
-                                <td>[[ sale.status ]]</td>  
+                                <td>[[ purchase.sold_by ]]</td>
+                                <td>[[ purchase.seller_contact ]]</td>
+                                <td>[[ purchase.purchase_order ]]</td>
+                                <td>[[ purchase.paid_amt ]]</td>
+                                <td>[[ purchase.pending_amt ]]</td>
+                                <td>[[ purchase.status ]]</td>  
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-success" v-on:click="editSale(sale, index)" data-bs-toggle="modal" data-bs-target="#editSaleModal">
+                                    <button type="button" class="btn btn-sm btn-success" v-on:click="editPurchase(purchase, index)" data-bs-toggle="modal" data-bs-target="#editpurchaseModal">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button>&nbsp;
-                                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteSale(sale, index)">
+                                    <button type="button" class="btn btn-sm btn-danger" v-on:click="deletepurchase(purchase, index)">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                 </td>  

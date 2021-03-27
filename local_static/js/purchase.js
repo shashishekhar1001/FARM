@@ -10,19 +10,19 @@ const PurchaseApp = {
             quantity_uom: null,
             quantity: null,
             reciept: null,
-            purchased_by: null,
-            purchaser_contact: null,
-            sale_order: "SO",
+            sold_by: null,
+            seller_contact: null,
+            purchase_order: "PO",
             paid_amt: null,
             pending_amt: null,
             status: null,
             success_msg: "",
             err_msg: "",
             errors: [],
-            sales: [],
+            purchases: [],
             edit_url: "",
             index: null,
-            req_url: "/api/sales/", 
+            req_url: "/api/purchases/", 
             count: null,
             no_of_pages: null,
             page_size: 3,
@@ -34,7 +34,7 @@ const PurchaseApp = {
         this.getAllData(this.req_url);
     },
     methods: {
-        onAddSale: function(){
+        onAddPurchase: function(){
             console.log("this.date");
             console.log(this.date);
             console.log("this.description");
@@ -51,12 +51,12 @@ const PurchaseApp = {
             console.log(this.quantity);
             console.log("this.reciept");
             console.log(this.reciept);
-            console.log("this.purchased_by");
-            console.log(this.purchased_by);
-            console.log("this.purchaser_contact");
-            console.log(this.purchaser_contact);
-            console.log("this.sale_order");
-            console.log(this.sale_order);
+            console.log("this.sold_by");
+            console.log(this.sold_by);
+            console.log("this.seller_contact");
+            console.log(this.seller_contact);
+            console.log("this.purchase_order");
+            console.log(this.purchase_order);
             console.log("this.paid_amt");
             console.log(this.paid_amt);
             console.log("this.pending_amt");
@@ -74,9 +74,9 @@ const PurchaseApp = {
             formData.append('quantity_uom', this.quantity_uom)
             formData.append('quantity', this.quantity)
             formData.append('reciept', this.reciept)
-            formData.append('purchased_by', this.purchased_by)
-            formData.append('purchaser_contact', this.purchaser_contact)
-            formData.append('sale_order', this.sale_order)
+            formData.append('sold_by', this.sold_by)
+            formData.append('seller_contact', this.seller_contact)
+            formData.append('purchase_order', this.purchase_order)
             formData.append('paid_amt', this.paid_amt)
             formData.append('pending_amt', this.pending_amt)
             formData.append('status', this.status)
@@ -101,10 +101,10 @@ const PurchaseApp = {
             if (!this.quantity) {
                 this.errors.push("Quantity required.");
             }
-            if (!this.purchaser_contact) {
+            if (!this.seller_contact) {
                 this.errors.push("Purchaser Contact required.");
             }
-            if (!this.purchased_by) {
+            if (!this.sold_by) {
                 this.errors.push("Purchased By required.");
             }
             if (!this.reciept) {
@@ -132,8 +132,8 @@ const PurchaseApp = {
                     this.pending_amt = null;
                     this.paid_amt = null;
                     this.reciept = null;
-                    this.purchased_by = null;
-                    this.purchaser_contact = null;
+                    this.sold_by = null;
+                    this.seller_contact = null;
                     this.quantity = null;
                     this.quantity_uom = null;
                     this.total_bill = null;
@@ -144,9 +144,9 @@ const PurchaseApp = {
                     this.success_msg= "";
                     this.err_msg= "";
                     this.errors= [];
-                    this.sales.unshift(response.data);
-                    document.getElementById("addSale").reset();
-                    $('#addSaleModal').modal('hide');
+                    this.purchases.unshift(response.data);
+                    document.getElementById("addPurchase").reset();
+                    $('#addPurchaseModal').modal('hide');
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -165,7 +165,7 @@ const PurchaseApp = {
             }
         },
 
-        onEditSale: function(){
+        onEditPurchase: function(){
             console.log("this.date");
             console.log(this.date);
             console.log("this.description");
@@ -182,12 +182,12 @@ const PurchaseApp = {
             console.log(this.quantity);
             console.log("this.reciept");
             console.log(this.reciept);
-            console.log("this.purchased_by");
-            console.log(this.purchased_by);
-            console.log("this.purchaser_contact");
-            console.log(this.purchaser_contact);
-            console.log("this.sale_order");
-            console.log(this.sale_order);
+            console.log("this.sold_by");
+            console.log(this.sold_by);
+            console.log("this.seller_contact");
+            console.log(this.seller_contact);
+            console.log("this.purchase_order");
+            console.log(this.purchase_order);
             console.log("this.paid_amt");
             console.log(this.paid_amt);
             console.log("this.pending_amt");
@@ -205,9 +205,9 @@ const PurchaseApp = {
             formData.append('quantity_uom', this.quantity_uom)
             formData.append('quantity', this.quantity)
             formData.append('reciept', this.reciept)
-            formData.append('purchased_by', this.purchased_by)
-            formData.append('purchaser_contact', this.purchaser_contact)
-            formData.append('sale_order', this.sale_order)
+            formData.append('sold_by', this.sold_by)
+            formData.append('seller_contact', this.seller_contact)
+            formData.append('purchase_order', this.purchase_order)
             formData.append('paid_amt', this.paid_amt)
             formData.append('pending_amt', this.pending_amt)
             formData.append('status', this.status)
@@ -232,10 +232,10 @@ const PurchaseApp = {
             if (!this.quantity) {
                 this.errors.push("Quantity required.");
             }
-            if (!this.purchaser_contact) {
+            if (!this.seller_contact) {
                 this.errors.push("Purchaser Contact required.");
             }
-            if (!this.purchased_by) {
+            if (!this.sold_by) {
                 this.errors.push("Purchased By required.");
             }
             if (!this.reciept) {
@@ -263,8 +263,8 @@ const PurchaseApp = {
                     this.pending_amt = null;
                     this.paid_amt = null;
                     this.reciept = null;
-                    this.purchased_by = null;
-                    this.purchaser_contact = null;
+                    this.sold_by = null;
+                    this.seller_contact = null;
                     this.quantity = null;
                     this.quantity_uom = null;
                     this.total_bill = null;
@@ -275,14 +275,14 @@ const PurchaseApp = {
                     this.success_msg= "";
                     this.err_msg= "";
                     this.errors= [];
-                    this.sales.splice(this.index, 1);
-                    this.sales.unshift(response.data);
-                    document.getElementById("editSale").reset();
-                    $('#editSaleModal').modal('hide');
+                    this.purchases.splice(this.index, 1);
+                    this.purchases.unshift(response.data);
+                    document.getElementById("editPurchase").reset();
+                    $('#editpurchaseModal').modal('hide');
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Your Sale Edit has been saved',
+                        title: 'Your Purchase Edit has been saved',
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -305,7 +305,7 @@ const PurchaseApp = {
                 headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
             }).then(response => {
                 console.log(response.data);
-                this.sales=response.data.results;
+                this.purchases=response.data.results;
                 this.next_page=response.data.next;
                 this.prev_page=response.data.previous;
                 this.count=response.data.count;
@@ -316,11 +316,11 @@ const PurchaseApp = {
                 }
                 console.log(this.next_page);
                 console.log(this.prev_page);
-                console.log(this.sales);
+                console.log(this.purchases);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Your Sales have been loaded',
+                    title: 'Your purchases have been loaded',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -344,7 +344,7 @@ const PurchaseApp = {
             this.getAllData(this.next_page);
         },
 
-        deleteSale: function(object, index){
+        deletepurchase: function(object, index){
             console.log(object.url);
             Swal.fire({
                 title: 'Are you sure?',
@@ -362,11 +362,11 @@ const PurchaseApp = {
                         headers: {'X-CSRFTOKEN': '{{ csrf_token }}', 'Content-Type': 'application/json'},
                     }).then(response => {
                         console.log(response.data);
-                        this.sales.splice(index, 1);
+                        this.purchases.splice(index, 1);
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Your field has been deleted!',
+                            title: 'Your PO has been deleted!',
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -392,13 +392,13 @@ const PurchaseApp = {
             this.current_page = number;
         },
 
-        editSale: function(object, index){
+        editPurchase: function(object, index){
             this.status = object.status;
             this.pending_amt = object.pending_amt;
             this.paid_amt = object.paid_amt;
             this.reciept = object.reciept;
-            this.purchased_by = object.purchased_by;
-            this.purchaser_contact = object.purchaser_contact;
+            this.sold_by = object.sold_by;
+            this.seller_contact = object.seller_contact;
             this.quantity = object.quantity;
             this.quantity_uom = object.quantity_uom;
             this.total_bill = object.total_bill;

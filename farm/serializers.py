@@ -159,7 +159,7 @@ class PurchaseSerializer(serializers.HyperlinkedModelSerializer):
         instance.paid_amt = validated_data.get('paid_amt', instance.paid_amt)
         instance.pending_amt = validated_data.get('pending_amt', instance.pending_amt)
         instance.status = validated_data.get('status', instance.status)
-        print(instance.sale_order)
+        print(instance.purchase_order)
         instance.save()
         return instance
     
