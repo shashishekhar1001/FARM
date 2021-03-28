@@ -63,6 +63,26 @@ class ExpenseSerializer(serializers.HyperlinkedModelSerializer):
             'amount',
         ]
 
+class LabourSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Labour
+        fields = [
+            'url',
+            'id',
+            'field',
+            'date',
+            'description',
+            'contractor',
+            'contractor_no',
+            'work_description',
+            'no_of_workers',
+            'daily_wage',
+            'work_status',
+            'additional_expenses',
+            'payment_status',
+            'total_bill'
+        ]
+
 
 class SaleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

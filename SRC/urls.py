@@ -30,6 +30,7 @@ router.register(r'waters', api_views.WaterViewSet)
 router.register(r'expenses', api_views.ExpenseViewSet)
 router.register(r'sales', api_views.SaleViewSet)
 router.register(r'purchases', api_views.PurchaseViewSet)
+router.register(r'labours', api_views.LabourViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
